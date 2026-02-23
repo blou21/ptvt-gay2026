@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proses Registrasi</title>
+  <title>Masa Aktif Habis</title>
 
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      background: linear-gradient(270deg, #ff616f, #ff9966, #ff4d4f);
+      background-size: 600% 600%;
+      animation: bgMove 8s ease infinite;
+
       color: #fff;
       display: flex;
       align-items: center;
@@ -18,73 +21,119 @@
       text-align: center;
     }
 
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .card {
       background: rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
+      border-radius: 22px;
       padding: 40px 30px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-      backdrop-filter: blur(10px);
-      max-width: 420px;
-      width: 90%;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(12px);
+      max-width: 400px;
+
+      animation: cardIn 1s ease forwards, float 3s ease-in-out infinite;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes cardIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .icon {
+      font-size: 4.5em;
+      margin-bottom: 15px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
     }
 
     h1 {
-      font-size: 1.9em;
+      font-size: 2em;
       margin-bottom: 10px;
+      animation: fadeUp 1.2s ease forwards;
     }
 
     p {
       font-size: 1em;
       margin-bottom: 25px;
       opacity: 0.9;
+      animation: fadeUp 1.5s ease forwards;
     }
 
-    /* Loader */
-    .loader {
-      width: 60px;
-      height: 60px;
-      border: 6px solid rgba(255, 255, 255, 0.3);
-      border-top: 6px solid #fff;
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn {
+      background: #fff;
+      color: #ff4d4f;
+      padding: 13px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      background: rgba(255, 77, 79, 0.2);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
       border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 25px;
+      transition: transform 0.4s ease;
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .btn:hover::after {
+      transform: translate(-50%, -50%) scale(1);
     }
 
-    /* Animasi titik */
-    .dots::after {
-      content: '';
-      animation: dots 1.5s infinite;
-    }
-
-    @keyframes dots {
-      0% { content: ''; }
-      33% { content: '.'; }
-      66% { content: '..'; }
-      100% { content: '...'; }
-    }
-
-    .note {
-      font-size: 0.9em;
-      opacity: 0.8;
-      margin-top: 15px;
+    .btn:hover {
+      background: #ff4d4f;
+      color: #fff;
+      transform: scale(1.08);
     }
   </style>
 </head>
+
 <body>
-
   <div class="card">
-    <div class="loader"></div>
-    <h1>Registrasi Ulang</h1>
-    <p>Sedang memproses data registrasi<span class="dots"></span></p>
-    <div class="note">
-      Mohon tunggu sampai proses selesai 1x24 jam 
-    </div>
+    <div class="icon">⚠️</div>
+    <h1>Masa Aktif Habis</h1>
+    <p>
+      Maaf, masa aktif akun kamu sudah habis.<br>
+      Silakan perpanjang langganan untuk melanjutkan layanan.
+    </p>
   </div>
-
 </body>
 </html>
